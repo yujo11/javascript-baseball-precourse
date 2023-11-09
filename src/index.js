@@ -37,6 +37,20 @@ function submitAnswer(e) {
   }
 }
 
+function checkInput(input) {
+  // 사용자 입력값이 중복이 되지않는 3자리 정수 인지를 확인
+  if (
+    Boolean(+input) === false ||
+    +input < 100 ||
+    +input > 999 ||
+    input[0] === input[1] ||
+    input[0] === input[2] ||
+    input[1] === input[2]
+  ) {
+    return false;
+  } else return true; // 조건에 맞지 않으면 false 조건에 맞으면 true를 반환
+}
+
 function countStrike(you, com) {
   // strike의 숫자를 반환하는 함수
   let count = 0; // 카운트 0 설정
@@ -73,7 +87,14 @@ function setResultText(strike, ball) {
 
 function playGame(e) {
   // 버튼을 눌렀을 때,
-  const userNumber = document.querySelector(".user-number-input").value; // 사용자 입력 숫자를 받음
+  const userNumber = answerInput.value; // 사용자 입력 숫자를 받음
+  let checker = checkInput(userNumber); // 사용자 입력값이 유효한지 확인
+  if (!checker) {
+    // 사용자 입력값이 유효하지 않을 때 경고창과 재입력 받음
+    answerInput.value = "";
+    alert("유효하지 않은 값입니다.");
+    return;
+  }
   let strikeCount = countStrike(userNumber, comNumbers); // 스트라이크 대입
   let ballCount = countBall(userNumber, comNumbers); // 볼 카운트 대입
   let resultText = setResultText(strikeCount, ballCount); // 결과 문자열 대입
