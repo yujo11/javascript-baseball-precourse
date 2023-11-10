@@ -1,27 +1,61 @@
-import BaseballGame from "./BaseballGame.js";
+import BaseballGame from "/src/BaseballGame.js";
+import {
+  convertDigitArrayToInt,
+  generateNonDuplicateRandomIntArray,
+} from "/src/utils.js";
 
-const concatPrimitiveIterToStr = (iter) =>
-  Array.from(iter).reduce((prev, cur) => prev + cur, "");
+const generateComputerInputNumbers = () =>
+  convertDigitArrayToInt(generateNonDuplicateRandomIntArray(3, 1));
 
-const generateRandomInt = (length = 1) => {
-  const min = 10 ** (length - 1);
-  const max = 10 ** length;
+const userInputEl = document.querySelector("#user-input");
+const submitBtnEl = document.querySelector("#submit");
+const resultEl = document.querySelector("#result");
 
-  return Math.floor(Math.random() * (max - min)) + min;
+const baseballGame = new BaseballGame();
+let computerInputNumbers = generateComputerInputNumbers();
+
+const handleRestart = (e) => {
+  userInputEl.disabled = false;
+  userInputEl.value = null;
+  userInputEl.focus();
+  resultEl.innerHTML = "";
+  computerInputNumbers = generateComputerInputNumbers();
 };
 
-const generateFixedSizeSet = (size = 1, generateValue) => {
-  const set = new Set();
-  while (set.size < size) {
-    const value = generateValue();
-    set.add(value);
+const handleSubmit = (e) => {
+  const userInputNumbers = Number(userInputEl?.value);
+  const result = baseballGame.play(computerInputNumbers, userInputNumbers);
+
+  if (!result) {
+    alert("유효하지 않은 입력입니다.");
+    userInputEl.focus();
+    return;
   }
-  return set;
+  if (result === "정답을 맞추셨습니다!") {
+    userInputEl.disabled = true;
+
+    const strongEl = document.createElement("strong");
+    strongEl.textContent = result;
+    resultEl.textContent = "";
+    resultEl.appendChild(strongEl);
+
+    const restartMention = document.createElement("span");
+    restartMention.textContent = "게임을 새로 시작하시겠습니까?";
+
+    const restartButtonEl = document.createElement("button");
+    restartButtonEl.textContent = "게임 재시작";
+    restartButtonEl.addEventListener("click", handleRestart);
+
+    const restartWrapper = document.createElement("div");
+    restartWrapper.appendChild(restartMention);
+    restartWrapper.appendChild(restartButtonEl);
+
+    resultEl.appendChild(restartWrapper);
+
+    return;
+  }
+
+  resultEl.textContent = result;
 };
 
-const generateRandomIntArr = (length) =>
-  Array.from(generateFixedSizeSet(length, generateRandomInt));
-
-const computerInputNumbers = Number(
-  concatPrimitiveIterToStr(generateRandomIntArr(3))
-);
+submitBtnEl.addEventListener("click", handleSubmit);
