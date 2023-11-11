@@ -19,11 +19,39 @@ const resultEl = document.querySelector("#result");
 const baseballGame = new BaseballGame();
 let computerInputNumbers = generateComputerInputNumbers();
 
-const handleRestart = (e) => {
+const resetUserInput = () => {
   userInputEl.disabled = false;
   userInputEl.value = null;
   userInputEl.focus();
+};
+
+const resetResultEl = () => {
   resultEl.innerHTML = "";
+};
+
+const showWinningResult = () => {
+  const strongEl = document.createElement("strong");
+  strongEl.textContent = result;
+  resultEl.textContent = "";
+  resultEl.appendChild(strongEl);
+
+  const restartMention = document.createElement("span");
+  restartMention.textContent = "게임을 새로 시작하시겠습니까?";
+
+  const restartButtonEl = document.createElement("button");
+  restartButtonEl.textContent = "게임 재시작";
+  restartButtonEl.addEventListener("click", handleRestart);
+
+  const restartWrapper = document.createElement("div");
+  restartWrapper.appendChild(restartMention);
+  restartWrapper.appendChild(restartButtonEl);
+
+  resultEl.appendChild(restartWrapper);
+};
+
+const handleRestart = (e) => {
+  resetUserInput();
+  resetResultEl();
   computerInputNumbers = generateComputerInputNumbers();
 };
 
@@ -38,25 +66,7 @@ const handleSubmit = (e) => {
   }
   if (result === "정답을 맞추셨습니다!") {
     userInputEl.disabled = true;
-
-    const strongEl = document.createElement("strong");
-    strongEl.textContent = result;
-    resultEl.textContent = "";
-    resultEl.appendChild(strongEl);
-
-    const restartMention = document.createElement("span");
-    restartMention.textContent = "게임을 새로 시작하시겠습니까?";
-
-    const restartButtonEl = document.createElement("button");
-    restartButtonEl.textContent = "게임 재시작";
-    restartButtonEl.addEventListener("click", handleRestart);
-
-    const restartWrapper = document.createElement("div");
-    restartWrapper.appendChild(restartMention);
-    restartWrapper.appendChild(restartButtonEl);
-
-    resultEl.appendChild(restartWrapper);
-
+    showWinningResult();
     return;
   }
 
