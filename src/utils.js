@@ -16,10 +16,10 @@ export const generateFixedSizeSet = (size = 1, generateValue) => {
   return set;
 };
 
-export const generateNonDuplicateRandomIntArray = (
+export const generateNonDuplicateRandomIntArray = ({
   arraylength,
-  digitCount = 1
-) =>
+  digitCount = 1,
+}) =>
   Array.from(
     generateFixedSizeSet(arraylength, () => generateRandomInt(digitCount))
   );

@@ -5,7 +5,12 @@ import {
 } from "/src/utils.js";
 
 const generateComputerInputNumbers = () =>
-  convertDigitArrayToInt(generateNonDuplicateRandomIntArray(3, 1));
+  convertDigitArrayToInt(
+    generateNonDuplicateRandomIntArray({
+      arraylength: 3,
+      digitCount: 1,
+    })
+  );
 
 const userInputEl = document.querySelector("#user-input");
 const submitBtnEl = document.querySelector("#submit");
