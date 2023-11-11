@@ -1,11 +1,19 @@
-//각 자릿수 별로 난수 생성하여 이어붙인 후 숫자형 변환
-//아직 자리 수 겹치지 않도록 구현 x
-function generateNum() {
-  let firstNum = String(Math.floor(Math.random() * 10));
-  let secondNum = String(Math.floor(Math.random() * 10));
-  let thirdNum = String(Math.floor(Math.random() * 10));
+//컴퓨터측 세 자리의 난수를 생성하는 함수
+function getMyNumber() {
+  function getRandomNumber() {
+    return Math.floor(Math.random() * 10);
+  }
 
-  return firstNum + secondNum + thirdNum;
+  const myNumber = [];
+
+  //겹치지 않는 난수로 length:3의 배열 생성
+  for (let i = 0; i < 3; i++) {
+    const randomNumber = getRandomNumber();
+    while (!myNumber.includes(randomNumber)) {
+      myNumber.push(randomNumber);
+    } //두 자리 수 나오는 문제 해결 팰요
+  }
+  return myNumber;
 }
 
 const myNumber = [1, 2, 3];
