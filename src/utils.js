@@ -7,7 +7,7 @@ export const generateRandomInt = (length = 1) => {
   return Math.floor(Math.random() * (max - min)) + min;
 };
 
-export const generateFixedSizeSet = (size = 1, generateValue) => {
+export const generateFixedSizeSet = (generateValue, { size = 1 }) => {
   const set = new Set();
   while (set.size < size) {
     const value = generateValue();
@@ -21,5 +21,7 @@ export const generateNonDuplicateRandomIntArray = ({
   digitCount = 1,
 }) =>
   Array.from(
-    generateFixedSizeSet(arraylength, () => generateRandomInt(digitCount))
+    generateFixedSizeSet(() => generateRandomInt(digitCount), {
+      size: arraylength,
+    })
   );
