@@ -1,11 +1,18 @@
 // Controller
 export default class BaseballGame {
   #DIGIT_LENGTH = 3;
+  #referee;
+
+  constructor(referee) {
+    this.#referee = referee;
+  }
+
   play(computerInputNumbers, userInputNumbers) {
     const isValidInput =
       this.#validateInputNumbers(computerInputNumbers) &&
       this.#validateInputNumbers(userInputNumbers);
     if (!isValidInput) return "";
+
     const judgement = this.#judge(computerInputNumbers, userInputNumbers);
     const result = this.#formatResult(judgement);
 
@@ -35,7 +42,7 @@ export default class BaseballGame {
   }
 
   // TODO: Judgeable 객체를 두 개를 비즈니스 로직에 따라 처리하는 Referee 서비스로 추출
-  #judge(computerInputDigits, userInputDigits) {
+  #judge(computerInputNumbers, userInputNumbers) {
     const set = new Set();
     let strike = 0;
     let ball = 0;
