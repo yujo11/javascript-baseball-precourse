@@ -25,9 +25,6 @@ function getUserNumber() {
   return userNumber;
 }
 
-const myNumber = [1, 2, 3];
-const userNumber = [3, 2, 6];
-
 // 3. myNumber과 userNumber을 비교하여 게임 실행 후 결과 출력: play
 
 function play(myNumber, userNumber) {
@@ -55,3 +52,14 @@ function play(myNumber, userNumber) {
     console.log("낫싱");
   }
 }
+
+const myNumber = getMyNumber();
+const userNumber = getUserNumber();
+
+// 4. 확인 버튼 클릭 시 play를 실행하는 이벤트 핸들러
+
+const button = document.querySelector("button");
+
+button.addEventListener("click", function (e) {
+  play(myNumber, userNumber);
+});
