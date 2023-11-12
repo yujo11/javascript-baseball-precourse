@@ -14,6 +14,4 @@ export default function RandomNumber({ onReturnRandomNumber }) {
   this.render = () => {
     onReturnRandomNumber(createRandomNumber());
   };
-
-  this.render();
 }

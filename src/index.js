@@ -1,6 +1,7 @@
 import RandomNumber from './RandomNumber.js';
 import UserInput from './UserInput.js';
 import Result from './Result.js';
+import Success from './Success.js';
 
 export default function BaseballGame() {
   this.state = {
@@ -17,7 +18,8 @@ export default function BaseballGame() {
   const randomNumber = new RandomNumber({
     // 3자리 난수 받아와 state 변경
     onReturnRandomNumber: (randomNum) => {
-      console.log('받아온 컴퓨터의 난수 ->', randomNum);
+      console.log(randomNum);
+      // 컴퓨터가 생성한 난수가 중복이 있다면 다시 난수 생성
       if (new Set(randomNum).size === 3) {
         this.setState({
           ...this.state,
@@ -26,6 +28,14 @@ export default function BaseballGame() {
       } else {
         randomNumber.render();
       }
+    },
+  });
+
+  // 게임 성공 컴포넌트
+  const success = new Success({
+    $target: document.querySelector('#app'),
+    initialState: {
+      result: this.state.result,
     },
   });
 
@@ -39,12 +49,19 @@ export default function BaseballGame() {
           userNum: userNumber,
         });
 
-        result.setState({
-          result: this.play(this.state.randomNum, this.state.userNum),
-        });
-
         // 컴퓨터의 난수 생성
         randomNumber.render();
+
+        // 유저가 입력한 숫자와 컴퓨터 숫자의 비교
+        const gameResult = this.play(this.state.randomNum, this.state.userNum);
+
+        result.setState({
+          result: gameResult,
+        });
+
+        success.setState({
+          result: gameResult,
+        });
       }
     },
   });
