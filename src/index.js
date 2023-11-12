@@ -1,10 +1,12 @@
-import RandomNumber from "./RandomNumber.js";
-import UserInput from "./UserInput.js";
+import RandomNumber from './RandomNumber.js';
+import UserInput from './UserInput.js';
+import Result from './Result.js';
 
 export default function BaseballGame() {
   this.state = {
-    randomNum: "", // 컴퓨터가 생성할 3자리 난수
-    userNum: "", // 유저가 입력한 3자리 숫자
+    randomNum: '', // 컴퓨터가 생성할 3자리 난수
+    userNum: '', // 유저가 입력한 3자리 숫자
+    result: '', // 컴퓨터와 유저가 선택한 숫자 결과
   };
 
   this.setState = (nextState) => {
@@ -23,7 +25,7 @@ export default function BaseballGame() {
   });
 
   // 유저의 숫자 입력을 받을 컴포넌트
-  const userInput = new UserInput({
+  new UserInput({
     // 유저의 3자리 숫자 받아와 state 변경
     onReturnUserNumber: (userNumber) => {
       if (userNumber) {
@@ -32,11 +34,21 @@ export default function BaseballGame() {
           userNum: userNumber,
         });
 
-        this.play(this.state.randomNum, this.state.userNum);
+        result.setState({
+          result: this.play(this.state.randomNum, this.state.userNum),
+        });
 
-        // 컴퓨터의 난수 다시 생성
+        // 컴퓨터의 난수 생성
         randomNumber.render();
       }
+    },
+  });
+
+  // 야구 경기 결과
+  const result = new Result({
+    $target: document.querySelector('#result'),
+    initialState: {
+      result: this.state.result,
     },
   });
 
@@ -58,7 +70,10 @@ export default function BaseballGame() {
     let ball = 0;
 
     for (let i = 0; i < 3; i++) {
-      for (let j = 0; j < 3; j++) {}
+      ball += [...userInputNumbers].filter(
+        (userNumber, index) =>
+          i !== index && userNumber === computerInputNumbers[i],
+      ).length;
     }
 
     return ball;
@@ -66,19 +81,13 @@ export default function BaseballGame() {
 
   // 게임 실행 함수
   this.play = function (computerInputNumbers, userInputNumbers) {
-    console.log(computerInputNumbers, userInputNumbers);
-    console.log(checkStrike(computerInputNumbers, userInputNumbers));
+    console.log('컴퓨터:', computerInputNumbers, '유저:', userInputNumbers);
 
-    return "결과 값 String";
+    const strike = checkStrike(computerInputNumbers, userInputNumbers);
+    const ball = checkBall(computerInputNumbers, userInputNumbers);
+
+    return `${ball}볼 ${strike}스트라이크`;
   };
-
-  // this.play();
 }
-
-// export default class BaseballGame {
-//   play(computerInputNumbers, userInputNumbers) {
-//     return "결과 값 String";
-//   }
-// }
 
 new BaseballGame();
