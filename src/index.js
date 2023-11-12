@@ -17,10 +17,15 @@ export default function BaseballGame() {
   const randomNumber = new RandomNumber({
     // 3자리 난수 받아와 state 변경
     onReturnRandomNumber: (randomNum) => {
-      this.setState({
-        ...this.state,
-        randomNum: randomNum,
-      });
+      console.log('받아온 컴퓨터의 난수 ->', randomNum);
+      if (new Set(randomNum).size === 3) {
+        this.setState({
+          ...this.state,
+          randomNum: randomNum,
+        });
+      } else {
+        randomNumber.render();
+      }
     },
   });
 

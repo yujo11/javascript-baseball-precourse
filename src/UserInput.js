@@ -6,7 +6,7 @@ export default function UserInput({ onReturnUserNumber }) {
   const inputNumberSubmit = () => {
     $userInput.addEventListener('keydown', (e) => {
       if (e.key === 'Enter') {
-        onReturnUserNumber(checkUserInput(String(e.target.value)));
+        onReturnUserNumber(checkUserInput(e.target.value));
       }
     });
   };
@@ -14,7 +14,7 @@ export default function UserInput({ onReturnUserNumber }) {
   // 사용자 입력 데이터 전송 함수(버튼)
   const inputNumberButtonClick = () => {
     $userClickButton.addEventListener('click', (e) => {
-      onReturnUserNumber(checkUserInput(String($userInput.value)));
+      onReturnUserNumber(checkUserInput($userInput.value));
     });
   };
 
@@ -23,7 +23,8 @@ export default function UserInput({ onReturnUserNumber }) {
     if (
       Number(text) < 0 ||
       typeof Number(text) !== 'number' ||
-      new Set(text).size !== 3
+      new Set(text).size !== 3 ||
+      text.length > 3
     ) {
       alert('잘못된 형식의 입력입니다. 3자리의 정수만 입력해주세요');
       $userInput.value = '';
