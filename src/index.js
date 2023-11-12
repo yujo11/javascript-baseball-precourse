@@ -86,7 +86,7 @@ export default function BaseballGame() {
     const strike = checkStrike(computerInputNumbers, userInputNumbers);
     const ball = checkBall(computerInputNumbers, userInputNumbers);
 
-    return `${ball}볼 ${strike}스트라이크`;
+    return { strike: strike, ball: ball };
   };
 }
 
