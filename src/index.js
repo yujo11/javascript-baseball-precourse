@@ -18,7 +18,6 @@ export default function BaseballGame() {
   const randomNumber = new RandomNumber({
     // 3자리 난수 받아와 state 변경
     onReturnRandomNumber: (randomNum) => {
-      console.log(randomNum);
       // 컴퓨터가 생성한 난수가 중복이 있다면 다시 난수 생성
       if (new Set(randomNum).size === 3) {
         this.setState({
