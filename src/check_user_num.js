@@ -1,11 +1,9 @@
 export { createUserNumbers };
 
-const userInput = document.querySelector('#user-input');
-
 // 만약 사용자 입력값에 오류가 있다면 경고창을 띄우고,
 // 오류가 없다면 사용자 입력값 배열로 받아오기
-function createUserNumbers() {
-  const userEnterNumbers = userInput.value;
+function createUserNumbers(e) {
+  const userEnterNumbers = e.target.elements['user-input'].value;
   if (userEnterNumbers === '') {
     alert('숫자를 입력해주세요.');
     userInput.focus();

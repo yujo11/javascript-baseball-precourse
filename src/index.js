@@ -13,7 +13,7 @@ console.log(computerNumberArray);
 function baseballGame(e) {
   e.preventDefault();
   // 2. 만약 사용자 입력값에 오류가 있다면 경고창을 띄우고, 없다면 배열로 받아오기
-  const userNumberArray = createUserNumbers();
+  const userNumberArray = createUserNumbers(e);
   // 3. 결과 메시지 출력하기
   const message = resultMessage(userNumberArray, computerNumberArray);
   result.textContent = message;
