@@ -27,15 +27,14 @@ app.addEventListener('submit', baseballGame);
 
 // 3자리 난수 생성
 function createComputerNumbers() {
-  let set = new Set();
+  const set = new Set();
   while (set.size < 3) {
     const num = Math.floor(Math.random() * 10);
     if (num >= 1) {
       set.add(String(num));
     }
   }
-  const computerNumbersArray = [...set];
-  return computerNumbersArray;
+  return [...set];
 }
 
 // 게임을 재시작할 것인지 물어보는 html 요소 생성하기

@@ -19,8 +19,7 @@ function createUserNumbers() {
     return;
   } else {
     const str = new String(userEnterNumbers);
-    const userNumbers = [...str];
-    return userNumbers;
+    return [...str];
   }
 }
 
