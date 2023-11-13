@@ -4,11 +4,11 @@ import { createUserNumbers } from './check_user_num.js';
 import { resultMessage } from './count.js';
 
 const app = document.querySelector('#app');
+const userInput = document.querySelector('#user-input');
 const result = document.querySelector('#result');
 
 // 1. 컴퓨터 난수 생성
-const computerNumberArray = createComputerNumbers();
-console.log(computerNumberArray);
+let computerNumberArray = createComputerNumbers();
 
 function baseballGame(e) {
   e.preventDefault();
@@ -44,9 +44,15 @@ function askRestart() {
   askText.textContent = '게임을 새로 시작하시겠습니까?';
   const restartBtn = document.createElement('button');
   restartBtn.textContent = '게임 재시작';
-  restartBtn.addEventListener('click', () => {
-    location.reload();
-  });
+  restartBtn.addEventListener('click', resetGame);
   askRestartBox.append(askText, restartBtn);
-  result.after(askRestartBox);
+  result.appendChild(askRestartBox);
+}
+
+// 게임 재시작 버튼을 누르면, 게임 초기화하기
+function resetGame(e) {
+  result.innerHTML = '';
+  userInput.value = '';
+  userInput.focus();
+  computerNumberArray = createComputerNumbers();
 }
