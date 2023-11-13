@@ -16,8 +16,7 @@ function createUserNumbers(e) {
     userInput.focus();
     return;
   } else {
-    const str = new String(userEnterNumbers);
-    return [...str];
+    return [...String(userEnterNumbers)];
   }
 }
 
