@@ -1,0 +1,20 @@
+* {
+  font-family: "Noto Sans KR", sans-serif;
+}
+
+.new-game-message-box {
+  display: none;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+
+.new-game-message-box button {
+  height: 1.5rem;
+}
+
+input::-webkit-inner-spin-button {
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+}

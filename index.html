@@ -3,6 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <title>숫자 야구 게임</title>
+    <link rel="stylesheet" href="./src/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <div id="app">
@@ -13,11 +20,24 @@
         올바른 예) 139 <br />
         틀린 예) 122
       </p>
-      <input type="text" id="user-input" />
+
+      <input
+        id="user-input"
+        type="number"
+        maxlength="3"
+        oninput="maxLengthCheck(this)"
+      />
       <button id="submit">확인</button>
       <h3>📄 결과</h3>
       <div id="result"></div>
+
+      <!--hidden reset message-->
+      <div class="new-game-message-box">
+        <h3>게임을 새로 시작하겠습니까?</h3>
+        <button>게임 재시작</button>
+      </div>
     </div>
-    <script type="module" src="src/index.js"></script>
+
+    <script src="src/index.js"></script>
   </body>
 </html>
