@@ -13,11 +13,15 @@
         올바른 예) 139 <br />
         틀린 예) 122
       </p>
+      <form id="user-form">
       <input type="text" id="user-input" />
       <button id="submit">확인</button>
       <h3>📄 결과</h3>
-      <div id="result"></div>
+      <div id="result" class="result" style="font-weight: bolder;"></div>
     </div>
+  </form>
+  <div id="restart" style="display: inline;"></div>
+  <button id="restart-btn" style="display: none" >게임 재시작</button>
     <script type="module" src="src/index.js"></script>
   </body>
 </html>
