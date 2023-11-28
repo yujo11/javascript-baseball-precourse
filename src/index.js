@@ -1,13 +1,5 @@
-export default function BaseballGame() {
-  this.play = function (computerInputNumbers, userInputNumbers) {
-    return "결과 값 String";
-  };
-}
+const userInput = document.querySelector('#user-input');
+const resultBtn = document.querySelector('#submit');
+const resultLog = document.querySelector('#result');
 
-// export default class BaseballGame {
-//   play(computerInputNumbers, userInputNumbers) {
-//     return "결과 값 String";
-//   }
-// }
 
-new BaseballGame();
