@@ -31,7 +31,8 @@ const getResult = (computerNum, myNum) => {
 
 // 게임이 이겼는지 확인
 const checkGameWin = ({ strike }) => {
-  return strike === 3 ? true : false;
+  const STRIKE_COUNT_TO_WIN = 3;
+  return strike === STRIKE_COUNT_TO_WIN ? true : false;
 };
 
 // 게임 결과를 문자열 형식으로 반환
